@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="lib/nprogress/nprogress.css">
+    <link rel="stylesheet" href="css/common.css"> 
+    <title>Document</title>
+    <style>
+    .left{
+        height: 100%;width: 180px;
+        background: #222D32;
+        position: fixed;left: 0;top: 0;
+        z-index: 9; transition: all 1s;
+    }
+    .top{
+        height: 50px;width: 100%;line-height: 50px;background-color: #3C8DBC;
+        position: fixed;top: 0;left: 0;padding-left: 180px;
+        z-index: 6;transition: all 1s;
+    }
+    .left-top{
+        color: white;font-size: 150%;font-weight: bolder;
+        text-align: center;height: 50px;line-height: 50px;
+        background-color: #367FA9;
+    }  
+    .left-user{padding-top: 50px;text-align: center;}
+    .left-user img{width: 80px;height: 80px;display: block;margin: 0 auto;border-radius: 50%;}
+    .left-user h4{color: white;}
+    .left-list{padding-top: 30px;}
+    .left-list li a{display: block;height: 40;line-height: 40px;color: white;
+        text-align: center;border-left: 3px solid transparent;}
+    .left-list-hid{
+        display: none;
+    }
+    .current{border-left: 3px solid blue!important;background-color: #1D1F21;}
+    .top>a{
+        color: white;width: 50px;height: 50px;font-size: 16px;text-align: center;
+    }
+    .hideM{left:-180px}
+    .hideP{padding-left:0!important;}
+    .txt{width: 100%;padding-left: 180px;transition: all 1s;padding-top: 80px;}
+    #echart-1,#echart-2{width: 48%;height: 500px;}
+    </style>
+</head>
+<body>
+    <!-- 左侧布局 -->
+    <div class="left">
+     <!-- 左侧头部 -->
+        <div class="left-top">
+           大屌营
+        </div>
+     <!-- 左侧头像 -->
+        <div class="left-user">
+            <img src="images/default.png" alt="">
+            <h4>超级大屌王</h4>
+        </div>
+     <!-- 左侧列表 -->
+        <div class="left-list">
+            <ul>
+                <li><a href="" id="user">
+                    <i class="glyphicon glyphicon-user"></i> <span>用户管理</span>
+                </a></li>
+                <li ><a href="" id="sort">
+                    <i class="glyphicon glyphicon-list"></i> <span>分类管理</span>
+                </a>
+                    <div class="left-list-hid">
+                        <a href="">
+                             <span>一级大屌</span>
+                        </a>
+                        <a href="">
+                            <span>二级大屌</span>
+                       </a>
+                    </div>
+                </li>
+                <li><a href="" id="shop">
+                    <i class="glyphicon glyphicon-tags"></i> <span>商品管理</span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 顶部布局 -->
+    <div class="top">
+ <a href="#" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
+ <a href="#" class="pull-right icon_logout"><i class="glyphicon glyphicon-log-out"></i></a>
+    </div>
+    <!-- 路径导航 -->
+    <div class="nav">     
+    </div>
+    <!-- 内容布局 -->
+    <div class="txt">
+        <div class=" pull-left" id="echart-1"></div>
+        <div class=" pull-right" id="echart-2"></div>
+    </div>
+    <!-- 模态框 -->
+    <div class="mo">
+
+    </div>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
+<script src="lib/echarts/echarts.min.js"></script>
+<script>
+    $(function(){
+        $('#user').on('click',function(e){
+           e.preventDefault()//组织默认跳转 有网页后关闭
+            $(this).addClass('current');
+            $('.left-list-hid').hide();
+            $('#shop').removeClass('current')
+            $('.left-list-hid a').removeClass('current')         
+            })
+         $('#shop').on('click',function(e){
+           e.preventDefault()//组织默认跳转 有网页后关闭
+            $(this).addClass('current');
+            $('.left-list-hid').hide();
+            $('#user').removeClass('current')
+            $('.left-list-hid a').removeClass('current')       
+            })
+        $('#sort').on('click',function (e) { 
+            e.preventDefault() ;   
+            $('.left-list-hid').slideToggle()             
+        })
+        $('.left-list-hid a').on('click',function (e) {
+            e.preventDefault()//组织默认跳转 有网页后关闭
+            $(this).addClass('current').siblings().removeClass('current');
+            $('#user').removeClass('current');
+            $('#shop').removeClass('current');
+        })
+
+        })
+    
+    $(function () {
+         $('.icon_menu').on('click',function(){    
+             $('.left').toggleClass('hideM');
+             $('.top').toggleClass('hideP');
+             $('.txt').toggleClass('hideP');
+         })
+     })  
+     
+    $(function () {
+     var myChart = echarts.init(document.getElementById('echart-1'));
+    var option = {
+        title: {
+                text: '2017年注册人数 '
+            },
+    xAxis: {
+        type: 'category',
+        data: ['1月', '2月', '3月', '4月', '5月', '6月']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    legend: {
+                data:['人数']
+            },
+    tooltip: {},
+    series: [{
+        name: '人数',
+        data: [1000, 1500, 1800,120, 70, 110],
+        type: 'bar'
+    }]
+};
+
+     myChart.setOption(option);
+
+     var myChart2= echarts.init(document.getElementById('echart-2'));
+    var option2 = {
+    title: {
+        text: '热门品牌销售',
+        subtext: '2017年9月',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['耐克', '阿迪', '新拜伦', '李宁', '大屌王']
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [
+                {value: 335, name: '耐克'},
+                {value: 310, name: '阿迪'},
+                {value: 234, name: '新拜伦'},
+                {value: 135, name: '李宁'},
+                {value: 1548, name: '大屌王'}
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+
+     myChart2.setOption(option2);
+    })
+</script>
+</body>
+</html>
