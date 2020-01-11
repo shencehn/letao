@@ -9,40 +9,8 @@
     <link rel="stylesheet" href="lib/nprogress/nprogress.css">
     <link rel="stylesheet" href="css/common.css"> 
     <title>Document</title>
-    <style>
-    .left{
-        height: 100%;width: 180px;
-        background: #222D32;
-        position: fixed;left: 0;top: 0;
-        z-index: 9; transition: all 1s;
-    }
-    .top{
-        height: 50px;width: 100%;line-height: 50px;background-color: #3C8DBC;
-        position: fixed;top: 0;left: 0;padding-left: 180px;
-        z-index: 6;transition: all 1s;
-    }
-    .left-top{
-        color: white;font-size: 150%;font-weight: bolder;
-        text-align: center;height: 50px;line-height: 50px;
-        background-color: #367FA9;
-    }  
-    .left-user{padding-top: 50px;text-align: center;}
-    .left-user img{width: 80px;height: 80px;display: block;margin: 0 auto;border-radius: 50%;}
-    .left-user h4{color: white;}
-    .left-list{padding-top: 30px;}
-    .left-list li a{display: block;height: 40;line-height: 40px;color: white;
-        text-align: center;border-left: 3px solid transparent;}
-    .left-list-hid{
-        display: none;
-    }
-    .current{border-left: 3px solid blue!important;background-color: #1D1F21;}
-    .top>a{
-        color: white;width: 50px;height: 50px;font-size: 16px;text-align: center;
-    }
-    .hideM{left:-180px}
-    .hideP{padding-left:0!important;}
-    .txt{width: 100%;padding-left: 180px;transition: all 1s;padding-top: 80px;}
-    #echart-1,#echart-2{width: 48%;height: 500px;}
+    <style>   
+    #echart-1,#echart-2{width: 48%;height: 500px;} 
     </style>
 </head>
 <body>
@@ -60,22 +28,22 @@
      <!-- 左侧列表 -->
         <div class="left-list">
             <ul>
-                <li><a href="" id="user">
+                <li><a href="user.html" id="user">
                     <i class="glyphicon glyphicon-user"></i> <span>用户管理</span>
                 </a></li>
-                <li ><a href="" id="sort">
+                <li ><a href="#" id="sort">
                     <i class="glyphicon glyphicon-list"></i> <span>分类管理</span>
                 </a>
                     <div class="left-list-hid">
-                        <a href="">
+                        <a href="first.html">
                              <span>一级大屌</span>
                         </a>
-                        <a href="">
+                        <a href="second.html">
                             <span>二级大屌</span>
                        </a>
                     </div>
                 </li>
-                <li><a href="" id="shop">
+                <li><a href="project.html" id="shop">
                     <i class="glyphicon glyphicon-tags"></i> <span>商品管理</span>
                 </a></li>
             </ul>
@@ -84,62 +52,54 @@
     <!-- 顶部布局 -->
     <div class="top">
  <a href="#" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
- <a href="#" class="pull-right icon_logout"><i class="glyphicon glyphicon-log-out"></i></a>
-    </div>
-    <!-- 路径导航 -->
-    <div class="nav">     
-    </div>
+ <a href="#" class="pull-right icon_logout"  data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-log-out"></i></a>
+    </div>  
+      <!-- 模态框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        温馨提示
+                    </h4>
+                </div>
+                <div class="modal-body">
+                   <i class="glyphicon glyphicon-info-sign"></i> 你确定要退出吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                    <button type="button " class="btn btn-primary button-exit">
+                        退出
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div> 
     <!-- 内容布局 -->
     <div class="txt">
+        <!-- 路径导航 -->
+    <div class="nav"> 
+        <ul class="breadcrumb">
+            <li><a href="index.html">管理系统</a></li>
+            <li>首页</li>        
+        </ul>    
+    </div>
         <div class=" pull-left" id="echart-1"></div>
         <div class=" pull-right" id="echart-2"></div>
     </div>
-    <!-- 模态框 -->
-    <div class="mo">
-
-    </div>
+  
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="lib/nprogress/nprogress.js"></script>
 <script src="lib/echarts/echarts.min.js"></script>
-<script>
-    $(function(){
-        $('#user').on('click',function(e){
-           e.preventDefault()//组织默认跳转 有网页后关闭
-            $(this).addClass('current');
-            $('.left-list-hid').hide();
-            $('#shop').removeClass('current')
-            $('.left-list-hid a').removeClass('current')         
-            })
-         $('#shop').on('click',function(e){
-           e.preventDefault()//组织默认跳转 有网页后关闭
-            $(this).addClass('current');
-            $('.left-list-hid').hide();
-            $('#user').removeClass('current')
-            $('.left-list-hid a').removeClass('current')       
-            })
-        $('#sort').on('click',function (e) { 
-            e.preventDefault() ;   
-            $('.left-list-hid').slideToggle()             
-        })
-        $('.left-list-hid a').on('click',function (e) {
-            e.preventDefault()//组织默认跳转 有网页后关闭
-            $(this).addClass('current').siblings().removeClass('current');
-            $('#user').removeClass('current');
-            $('#shop').removeClass('current');
-        })
-
-        })
-    
-    $(function () {
-         $('.icon_menu').on('click',function(){    
-             $('.left').toggleClass('hideM');
-             $('.top').toggleClass('hideP');
-             $('.txt').toggleClass('hideP');
-         })
-     })  
-     
+<script src="js/com.js"></script>
+<script>   
+     //echart插件
     $(function () {
      var myChart = echarts.init(document.getElementById('echart-1'));
     var option = {
@@ -208,7 +168,7 @@
 
 
      myChart2.setOption(option2);
-    })
+    })         
 </script>
 </body>
 </html>

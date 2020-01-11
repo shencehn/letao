@@ -129,7 +129,7 @@
               success: function (info) {
                 console.log(info);               
                 if (info.success) {
-                  console.log('登录成功');                
+                  location.href = "index.html"              
                 }
                 if (info.error==1000) {
                   validator.updateStatus('username', 'INVALID', 'callback')

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="lib/nprogress/nprogress.css">
+    <link rel="stylesheet" href="css/common.css"> 
+    <title>Document</title>
+    <style>
+    .left-list-hid{display: block;}
+    </style>
+</head>
+<body>
+     <!-- 左侧布局 -->
+     <div class="left">
+        <!-- 左侧头部 -->
+           <div class="left-top">
+              大屌营
+           </div>
+        <!-- 左侧头像 -->
+           <div class="left-user">
+               <img src="images/default.png" alt="">
+               <h4>超级大屌王</h4>
+           </div>
+        <!-- 左侧列表 -->
+           <div class="left-list">
+            <ul>
+                <li><a href="user.html" id="user">
+                    <i class="glyphicon glyphicon-user"></i> <span>用户管理</span>
+                </a></li>
+                <li ><a href="#" id="sort">
+                    <i class="glyphicon glyphicon-list"></i> <span>分类管理</span>
+                </a>
+                    <div class="left-list-hid">
+                        <a href="first.html">
+                             <span>一级大屌</span>
+                        </a>
+                        <a href="second.html">
+                            <span>二级大屌</span>
+                       </a>
+                    </div>
+                </li>
+                <li><a href="project.html" id="shop">
+                    <i class="glyphicon glyphicon-tags"></i> <span>商品管理</span>
+                </a></li>
+            </ul>
+           </div>
+       </div>
+       <!-- 顶部布局 -->
+       <div class="top">
+    <a href="#" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
+    <a href="#" class="pull-right icon_logout"  data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-log-out"></i></a>
+       </div>  
+         <!-- 模态框 -->
+         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                           &times;
+                       </button>
+                       <h4 class="modal-title" id="myModalLabel">
+                           温馨提示
+                       </h4>
+                   </div>
+                   <div class="modal-body">
+                      <i class="glyphicon glyphicon-info-sign"></i> 你确定要退出吗？
+                   </div>
+                   <div class="modal-footer">
+                       <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                       </button>
+                       <button type="button " class="btn btn-primary button-exit">
+                           退出
+                       </button>
+                   </div>
+               </div><!-- /.modal-content -->
+           </div><!-- /.modal -->
+       </div> 
+       <!-- 内容布局 -->
+    <div class="txt">
+        <!-- 路径导航 -->
+    <div class="nav"> 
+        <ul class="breadcrumb">
+            <li><a href="index.html">管理系统</a></li>
+            <li>分类管理</li>
+            <li>一级分类</li>        
+        </ul>    
+    </div>
+        <div class=" pull-left" id="echart-1"></div>
+        <div class=" pull-right" id="echart-2"></div>
+    </div>
+       <script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
+<script src="js/com.js"></script>
+</body>
+</html>
